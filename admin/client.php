@@ -4,12 +4,12 @@ include_once 'admin.header.php';
 ?>
 
 <div class="d-flex flex-row justify-content-end">
-        <div><a class="btn btn-primary btn-lg" role="button" id="add" href="#myModal" data-bs-toggle="modal" style="margin: 7px;">Add</a>
-            <div class="modal fade" role="dialog" tabindex="-1" id="myModal-2">
+        <div><a class="btn btn-primary btn-lg" role="button" id="add" href="#addUser" data-bs-toggle="modal" style="margin: 7px;">Add</a>
+            <div class="modal fade" role="dialog" tabindex="-1" id="addUser">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4>Modal Title</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            <h4>Add User</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
                             <p class="text-center text-muted">Description </p>
@@ -18,6 +18,7 @@ include_once 'admin.header.php';
                     </div>
                 </div>
             </div>
+            
         </div>
     </div>
     <div style="margin: 25px;">
@@ -25,59 +26,119 @@ include_once 'admin.header.php';
             <table class="table">
                 <thead>
                     <tr>
+                        <th>Number</th>
                         <th>UserName</th>
                         <th>Address</th>
                         <th>Email</th>
                         <th>Password</th>
                         <th>Created</th>
-                        <th style="text-align: center;">Option</th>
+                        <th style="text-align: center;">Action</th>
                     </tr>
                 </thead>
+                <?php
+        $usernum = 1;
+        $tableview = $conn->query("SELECT * FROM user");
+        while ($view = $tableview->fetch_assoc()){
+            $date = date(" F, d, Y h:i A",strtotime($view['userTimestamp'])) ; 
+            //     Y/F/d 
+
+        ?>
                 <tbody>
                     <tr>
-                        <td>name</td>
-                        <td>address</td>
-                        <td>mail</td>
-                        <td>pass</td>
-                        <td>time</td>
+                        <td> <?php echo $usernum++; ?> </td>
+                        <td> <?php echo $view['userName']; ?> </td>
+                        <td><?php echo $view['userAddress']; ?></td>
+                        <td><?php echo $view['userMail']; ?></td>
+                        <td><?php echo $view['userPwd']; ?></td>
+                        <td><?php echo $date; ?></td>
+
                         <td class="d-flex flex-row justify-content-evenly">
-                            <div><a class="btn btn-primary btn-lg" role="button" id="edit" href="#myModal" data-bs-toggle="modal" style="background: rgb(75,203,15);border-style: none;padding: 2px 16px;">Edit</a>
-                                <div class="modal fade" role="dialog" tabindex="-1" id="myModal">
+                            <div><a class="btn btn-primary btn-lg" role="button" id="edit" href="#edit<?php echo $view['userId']; ?>" data-bs-toggle="modal" style="background: rgb(75,203,15);border-style: none;padding: 2px 16px;">Edit</a>
+                                
+                            <div class="modal fade" role="dialog" tabindex="-1" id="edit<?php echo $view['userId']; ?>">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4>Edit Profile</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                <h4>Edit <?php echo $view['userName'];?>'s Profile </h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p class="text-center text-muted">Description </p>
-                                            </div>
-                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                                                <p class="text-center text-muted">Description</p>
+                        <form action="adminphp/updateUser.inc.php" method="POST" role="form">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>User Name</td>
+                                            <input type="hidden" value="<?php echo $view['userId']; ?>" name="id">
+                                            <td><input class="form-control" type="text" name="username" value="<?php echo $view['userName']; ?>"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>First Name</td>
+                                            <td><input class="form-control" type="text" name="fname" value="<?php echo $view['userFname']; ?>"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Last Name</td>
+                                            <td><input class="form-control" type="text" name="lname" value="<?php echo $view['userLname']; ?>"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Contact Num</td>
+                                            <td><input class="form-control" type="text" name="contact" value="<?php echo $view['userContact']; ?>"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Adress</td>
+                                            <td><input class="form-control" type="text" name="address" value="<?php echo $view['userAddress']; ?>"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mail</td>
+                                            <td><input class="form-control" type="text" name="email" value="<?php echo $view['userMail']; ?>"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Password</td>
+                                            <td><input class="form-control" type="text"  name="pass" value="<?php echo $view['userPwd']; ?>"></td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
+                            <input type="submit" name="userUpdate" class="btn btn-primary" value="Update">
+                            </div>
+                        </form>
+                                            </div>                                           
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div><a class="btn btn-primary btn-lg" role="button" id="delete" href="#myModal" data-bs-toggle="modal" style="border-style: none;background: rgb(253,13,42);padding: 2px 16px;">Delete</a>
-                                <div class="modal fade" role="dialog" tabindex="-1" id="myModal-1">
+                            
+                            <div><a class="btn btn-primary btn-lg" role="button" id="del" href="#delete<?php echo $view['userId']; ?>" data-bs-toggle="modal" style="border-style: none;background: rgb(253,13,42);padding: 2px 16px;">Delete</a>
+                                <div class="modal fade" role="dialog" tabindex="-1" id="delete<?php echo $view['userId']; ?>">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4>Delete</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                <h4>Kill <?php echo $view['userName']; ?>?</h4>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p class="text-center text-muted">Description </p>
+                                                <p class="text-center text-muted">Are you sure to DELETE this USER from the database? </p>
                                             </div>
-                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
+                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
+                                            <a href="adminphp/connect.php?delete=<?php echo $view['userId'];?>" class="btn btn-primary" >Delete</a>
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </td>
+                           
+                        </td>   
                     </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
     </div>
     <?php
 include_once 'admin.footer.php';
-
 ?>

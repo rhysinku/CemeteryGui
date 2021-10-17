@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+include '../php/connection.php';
+//include 'adminphp/connect.php';
 
 ?>
 
