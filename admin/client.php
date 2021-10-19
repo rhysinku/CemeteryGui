@@ -12,9 +12,63 @@ include_once 'admin.header.php';
                             <h4>Add User</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <p class="text-center text-muted">Description </p>
+                            <p class="text-center text-muted">Create New User </p>
+                            <form action="adminphp/addUser.inc.php" method="POST" role="form">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr></tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>User Name</td>
+                                            
+                                            <td><input class="form-control" type="text" name="username" ></td>
+                                        </tr>
+                                        <tr>
+                                            <td>First Name</td>
+                                            <td><input class="form-control" type="text" name="fname" ></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Last Name</td>
+                                            <td><input class="form-control" type="text" name="lname" ></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Contact Num</td>
+                                            <td><input class="form-control" type="text" name="contact" ></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Adress</td>
+                                            <td><input class="form-control" type="text" name="address" ></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Mail</td>
+                                            <td><input class="form-control" type="text" name="email"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Password</td>
+                                            <td><input type="password" class="form-control" name="pass"  id="myPassword">
+                                         <input type="checkbox" onclick="myFunction()"> View Password <div class="col-sm-8">
+                                          <script>
+                                          function myFunction() {
+                                            var x = document.getElementById("myPassword");
+                                            if (x.type === "password") {
+                                              x.type = "text";
+                                            } else {
+                                              x.type = "password";
+                                            }
+                                          }
+                                          </script>
+                                      </div></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
+                            <input type="submit" name="userAdd" class="btn btn-primary" value="Add">
+                            </div>
+                        </form>
                         </div>
-                        <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button><button class="btn btn-primary" type="button">Save</button></div>
                     </div>
                 </div>
             </div>
@@ -88,7 +142,7 @@ include_once 'admin.header.php';
                                             <td><input class="form-control" type="text" name="contact" value="<?php echo $view['userContact']; ?>"></td>
                                         </tr>
                                         <tr>
-                                            <td>Adress</td>
+                                            <td>Address</td>
                                             <td><input class="form-control" type="text" name="address" value="<?php echo $view['userAddress']; ?>"></td>
                                         </tr>
                                         <tr>
@@ -104,7 +158,7 @@ include_once 'admin.header.php';
                                 </table>
                             </div>
                             <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button>
-                            <input type="submit" name="userUpdate" class="btn btn-primary" value="Update">
+                            <button type="submit" name="userUpdate" class="btn btn-primary">Update</button>
                             </div>
                         </form>
                                             </div>                                           

@@ -78,7 +78,7 @@ include_once 'header.php';
                                                     </div>
                                                 </div>
                                                 <div class="modal-footer">
-                                                <button class="btn btn-light" type="button"data-bs-dismiss="modal" name="draft">Save to Draft</button>
+                                                <button class="btn btn-light" type="submit" data-bs-dismiss="modal" name="draft">Save to Draft</button>
                                                 <button class="btn btn-primary" type="submit" name="pay">Proceed to Payment</button></div>
                                             </div>
                                         </div>

@@ -25,8 +25,8 @@ include '../php/connection.php';
     if(isset($_SESSION["user"]))
                 {
                     echo "<li class='nav-item'><a class='nav-link active' href='admin.php'>Cemetery</a></li>";
-                    echo "<li class='nav-item'><a class='nav-link' href='Profile.php'>".$_SESSION["user"]."</a></li>";
-                    echo "<li class='nav-item'><a class='nav-link' href='Booking.php'>Config</a></li>";
+                    echo "<li class='nav-item'><a class='nav-link' href='adminProfile.php'>".$_SESSION["user"]."</a></li>";
+                    echo "<li class='nav-item'><a class='nav-link' href='deaddata.php'>Config</a></li>";
                     echo "<li class='nav-item'><a class='nav-link' href='client.php'>Client</a></li>";
                     echo "<li class='nav-item'><a class='nav-link' href='../admin/adminphp/adminlogout.inc.php'>Logout</a></li>";
                 }

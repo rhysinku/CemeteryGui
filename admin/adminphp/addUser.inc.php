@@ -1,9 +1,9 @@
 <?php
 require_once 'connect.php';
 
-if(isset($_POST["userUpdate"]))
+if(isset($_POST["userAdd"]))
 {
-    $id=  $_POST["id"];
+    
     $username = $_POST["username"];
     $fname = $_POST["fname"];
     $lname = $_POST["lname"];
@@ -12,9 +12,8 @@ if(isset($_POST["userUpdate"]))
     $email = $_POST["email"];
     $password = $_POST["pass"];
 
-        $update = "UPDATE user SET 
-                    userName = '$username', userFname = '$fname', userLname = '$lname',userContact = '$num' ,userAddress = '$address',userMail = '$email',userPwd = '$password'
-                   WHERE userId = '$id' ";
+        $update = "INSERT INTO user (userName, userFname, userLname,userContact,userAddress,userMail,userPwd)
+                    VALUES ('$username','$fname','$lname','$num','$address','$email','$password')";
 
             if(mysqli_query($conn,$update))
             {

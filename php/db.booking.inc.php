@@ -16,7 +16,7 @@ if(isset($_POST["pay"]))
         $sql = "INSERT INTO booking (userid, corpse, dateBirth, dateDeath, corpseAddress, corpseReligion, payment)
                 VALUES ('$userId','$corpse','$dob','$dod','$address','$religion' , 1)";
         mysqli_query($conn,$sql);
-        header("Location: ../Booking.php?msg=GANA");
+        header("Location: ../Booking.php?msg=Pay");
    
 }
 
@@ -34,7 +34,7 @@ if(isset($_POST["draft"]))
         $sql = "INSERT INTO booking (userid, corpse, dateBirth, dateDeath, corpseAddress, corpseReligion, payment)
                 VALUES ('$userId','$corpse','$dob','$dod','$address','$religion' , 0)";
         mysqli_query($conn,$sql);
-        header("Location: ../Booking.php?msg=GANA");
+        header("Location: ../Booking.php?msg=Draft");
    
 }
 
