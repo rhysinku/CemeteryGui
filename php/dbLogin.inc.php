@@ -21,7 +21,7 @@ require_once 'connection.php';
             $_SESSION['userId'] = $userID;
             
         }
-        if($_SESSION['user'] == "Admin")
+        if($_SESSION['user'] == "Admin" || $_SESSION['user'] == "admin")
         {
         header("Location: ../admin/admin.php?disp=Admin"); 
         }

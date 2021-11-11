@@ -92,7 +92,7 @@ include_once 'admin.header.php';
                 <?php
         $usernum = 1;
         $tableview = $conn->query("SELECT * FROM user");
-        while ($view = $tableview->fetch_assoc()){
+        while ($view = $tableview->fetch_assoc()):
             $date = date(" F, d, Y h:i A",strtotime($view['userTimestamp'])) ; 
             //     Y/F/d 
 
@@ -188,11 +188,14 @@ include_once 'admin.header.php';
                            
                         </td>   
                     </tr>
-                    <?php } ?>
+                    <?php endwhile ?>
                 </tbody>
             </table>
         </div>
     </div>
+
+
+
     <?php
 include_once 'admin.footer.php';
 ?>
