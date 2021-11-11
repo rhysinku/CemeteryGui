@@ -1,0 +1,115 @@
+<body><title>Project</title>
+  <script>
+      var Meter_No = []; 
+      var Present_Reading = []; 
+      var Previous_Reading = []; 
+      var Type_of_Registration = [];
+      var Consumption_Reading = []; 
+      var Electricty_Charge = [];
+      var Demand_Charge_Type = []; 
+      var Service_Charge_Type = []; 
+      var Principal_Amount = []; 
+      var Amount_Payable = [];
+      var insert;
+      var counter;
+      var Vat = 0.5;
+      function MAIN(){       
+          let CHOICE = window.prompt("MENU \n1.ADD\n2.SEARCH\n3.DISPLAY ALL\n4.EXIT\nCHOOSE:");
+          switch(CHOICE) {
+              case '1':
+                  ADD();
+                  break;
+              case '2':
+                  SEARCH();
+                  break;
+              case '3':
+                  DISPLAY();
+                  break;
+              case '4':
+                  throw new Error('exit');
+                  break;
+              default:
+          }
+      }
+      function ADD(){
+          for(var i=0; i < 10; i++){
+          insert = window.prompt("METER NUMBER: ");
+          insert= parseInt(insert);
+          Meter_No.push(insert);
+          insert = window.prompt("PRESENT READING: ");
+          insert= parseInt(insert);
+          Present_Reading.push(insert);
+          insert = window.prompt("PREVIOUS READING: ");
+          insert= parseInt(insert);
+          Previous_Reading.push(insert);
+          insert = window.prompt("TYPE OF REGISTRATION:\n1.HOME\n2.BUSINESS");
+          switch(insert) {
+              case '1':
+              Type_of_Registration.push("HOME");2
+              Demand_Charge_Type.push(20);
+              Service_Charge_Type.push(5);
+              break;
+              case '2':
+              Type_of_Registration.push("BUSINESS");
+              Demand_Charge_Type.push(40);
+              Service_Charge_Type.push(10);
+              break;
+              default:
+          }
+          Consumption_Reading.push(Present_Reading[i] - Previous_Reading[i]);
+          if(Consumption_Reading[i] < 72){
+              Electricty_Charge.push(2.50);
+          }else if(Consumption_Reading[i] <= 150){
+              Electricty_Charge.push(3.50);
+          }else if(Consumption_Reading[i] <= 300){
+              Electricty_Charge.push(4.50);
+          }else if(Consumption_Reading[i] <= 400){
+              Electricty_Charge.push(5.50);
+          }else if(Consumption_Reading[i] <= 500){
+              Electricty_Charge.push(6.00);
+          }else{
+              Electricty_Charge.push(6.50);
+          }
+          Principal_Amount.push(Electricty_Charge[i] + Demand_Charge_Type[i] + Service_Charge_Type[i]);
+          Amount_Payable.push(Principal_Amount[i] + (Principal_Amount[i] * Vat)); 
+         // counter++;           
+          }   
+      MAIN();  
+      }
+      function SEARCH(){
+          var search = window.prompt("Search Meter Number: ");
+          for(var i=0; i < Meter_No.length; i++){
+              if(parseInt(Meter_No[i]) == search){
+                  window.alert("Meter Number: " + Meter_No[i] 
+                  + "\nPresent Reading: " + Present_Reading[i]
+                  + "\nPrevious Reading: " + Previous_Reading[i]
+                  + "\nType of Registration: " + Type_of_Registration[i]
+                  + "\nConsumption Reading: " + Consumption_Reading[i]
+                  + "\nConsumption Reading: " + Electricty_Charge[i]
+                  + "\nDemand Charge: " + Demand_Charge_Type[i]
+                  + "\nService Charge: " + Service_Charge_Type[i]
+                  + "\nPrincipal Amount: " + Principal_Amount[i]
+                  + "\nAmount Payable: " + Amount_Payable[i]); 
+                  break;
+              }             
+          }
+          MAIN();
+      }
+      function DISPLAY(){
+          for(var i=0; i < 10; i++){
+              window.alert("Meter Number: " + Meter_No[i] 
+              + "\nPresent Reading: " + Present_Reading[i]
+              + "\nPrevious Reading: " + Previous_Reading[i]
+              + "\nType of Registration: " + Type_of_Registration[i]
+              + "\nConsumption Reading: " + Consumption_Reading[i]
+              + "\nConsumption Reading: " + Electricty_Charge[i]
+              + "\nDemand Charge: " + Demand_Charge_Type[i]
+              + "\nService Charge: " + Service_Charge_Type[i]
+              + "\nPrincipal Amount: " + Principal_Amount[i]
+              + "\nAmount Payable: " + Amount_Payable[i]);
+          }
+          MAIN();
+      }
+      MAIN();
+  </script>
+</body>
