@@ -68,7 +68,8 @@ include_once 'php/db.profile.inc.php';
                         <th>Corpse</th>
                         <th>Time Created</th>
                         <th>Payment</th>
-                        <th style="text-align:center">Option</th>
+                        <th>Approvement</th>
+                        <th>Option</th>
                     </tr>
                 </thead>
                 <?php
@@ -77,21 +78,14 @@ include_once 'php/db.profile.inc.php';
 
         $tableview = $conn->query("SELECT * 
         FROM booking INNER JOIN user ON booking.userid = user.userId 
-        WHERE user.userId IN ('$id')");
+        WHERE user.userId IN ('$id') ORDER BY booking.corpsetimestamp DESC");
 
         while ($view = $tableview->fetch_assoc()){
         $date = date(" F, d, Y h:i A",strtotime($view['corpsetimestamp'])); 
         $dob = date(" F, d, Y",strtotime($view['dateBirth']));
         $dod = date(" F, d, Y",strtotime($view['dateDeath']));
             //     Y/F/d  user booking
-        $payment = $view['payment'];
-        if( $payment == 1)
-        {   
-            $pay = "Paid";
-        }
-        else{
-            $pay = "Save to Draft";
-        }
+
 
         ?>
                 <tbody>
@@ -99,9 +93,11 @@ include_once 'php/db.profile.inc.php';
                         <td><?php echo $usernum++; ?></td>
                         <td><?php echo $view['corpse']; ?></td>
                         <td><?php echo $date ?></td>
-                        <td><?php echo $pay ?></td>
+                        <td><?php echo $view['payment']; ?></td>
+                        <td class=""><?php echo $view['adminapprove']; ?></td>
                         <td class="d-flex flex-row justify-content-evenly" style="padding: 0;">
-                            <div><a class="btn btn-primary btn-lg" role="button" href="#preview<?php echo $view['id'];?>" data-bs-toggle="modal">Preview</a>
+                            <div>
+                                <a class="btn btn-primary btn-lg" role="button" href="#preview<?php echo $view['id'];?>" data-bs-toggle="modal">Preview</a>
                                 <div class="modal fade" role="dialog" tabindex="-1" id="preview<?php echo $view['id'];?>">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
@@ -136,8 +132,12 @@ include_once 'php/db.profile.inc.php';
                                         <td><?php echo $dod; ?></td>
                                     </tr>
                                     <tr>
-                                        <td>Payment</td>
-                                        <td><?php echo $pay; ?></td>
+                                        <td>Payments</td>
+                                        <td><?php echo $view['payment']; ?></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Admin Appovement</td>
+                                        <td><?php echo $view['adminapprove']; ?></td>
                                     </tr>
                                 </tbody>
                             </table>

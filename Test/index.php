@@ -1,41 +1,80 @@
-<?php include("connect.php"); ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Cemetery</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="/assets/css/Map-Clean.css">
-</head>
-
-<body>
-    <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button" id="count"></button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="#" >data</a>
-        </div>
+<html>
+ <head>
+  <title>Webslesson Tutorial | Facebook Style Header Notification using PHP Ajax Bootstrap</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+ </head>
+ <body>
+  <br /><br />
+  <div class="container">
+   <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+     <div class="navbar-header">
+      <a class="navbar-brand" href="#">Webslesson Tutorial</a>
+     </div>
+     <ul class="nav navbar-nav navbar-right">
+      <li class="dropdown">
+       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+           <span class="label label-pill label-danger count" style="border-radius:10px;">
+        </span> <span class="glyphicon glyphicon-envelope" style="font-size:18px;"></span></a>
+       <ul class="dropdown-menu"></ul>
+      </li>
+     </ul>
     </div>
-
-
+   </nav>
+   <br />
    
-</body>
-<script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+   
+  </div>
+ </body>
 </html>
-
+<script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script>
-    $(function(){
-        $.ajax({
-            url: 'fetch.php',
-            success:function(){
-                var count = JSON.parse($count);
-                console.log($count);
-
-            }
-        })
-    })
+$(document).ready(function(){
+ 
+ function load_unseen_notification(view = '')
+ {
+  $.ajax({
+   url:"ajax.php",
+   method:"POST",
+   data:{view:view},
+   dataType:"json",
+   success:function(data)
+   {
+    $('.dropdown-menu').html(data.notification);
+    if(data.unseen_notification > 0)
+    {
+     $('.count').html(data.unseen_notification);
+    }
+   }
+  });
+ }
+ 
+ //load_unseen_notification();
+ 
+//  $(document).on('click', '.dropdown-toggle', function(){
+//   $('.count').html('');
+//   load_unseen_notification('yes');
+//  });
+ 
+ setInterval(function(){ 
+  load_unseen_notification();; 
+ }, 1000);
+ 
+});
 </script>
+
+
+
+<!-- <script>
+$(document).ready(function(){
+ 
+ setInterval(function(){//setInterval() method execute on every interval until called clearInterval()
+  $('#load_posts').load("ajax.php").fadeIn("slow");
+  //load() method fetch data from fetch.php page
+ }, 1000);
+ 
+});
+</script> -->

@@ -8,6 +8,7 @@ include '../php/connection.php';
 <!DOCTYPE html>
 <html lang="en">
 
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -27,18 +28,34 @@ include '../php/connection.php';
     <?php 
     if(isset($_SESSION["user"]))
                 {
-                    echo "<li class='nav-item'><a class='nav-link active' href='admin.php'>Cemetery</a></li>";
-                    echo "<li class='nav-item'><a class='nav-link' href='adminProfile.php'>".$_SESSION["user"]."</a></li>";
-                    echo "<li class='nav-item'><a class='nav-link' href='deaddata.php'>Config</a></li>";
-                    echo "<li class='nav-item'><a class='nav-link' href='client.php'>Client</a></li>";
-                    echo "<li class='nav-item'><a class='nav-link' href='../admin/adminphp/adminlogout.inc.php'>Logout</a></li>";
+                    ?>
+                    <li class='nav-item'><a class='nav-link active' href='admin.php'>Cemetery</a></li>
+                    <li class='nav-item'><a class='nav-link' href='#'><?php echo $_SESSION["user"]; ?></a></li>
+                    <li class='nav-item'><a class='nav-link' href='deaddata.php'>Config</a></li>";
+                    <li class='nav-item'><a class='nav-link' href='client.php'>Client</a></li>";
+                    <li class="nav-item">
+                    <div class="nav-item dropdown">
+                    <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">
+                    <span class="counter"></span>  <span><i class="fa fa-bell"></i></span></button>
+                    <div class="dropdown-menu">
+                        
+                    </div>
+                    </div>
+                    </li>
+                    <li class='nav-item'><a class='nav-link' href='../admin/adminphp/adminlogout.inc.php'>Logout</a></li>
+                    <?php
                 }
                 else
-                {
-                    echo "<li class='nav-item'><a class='nav-link active' href='index.php'>Cemetery</a></li>";
-                    echo " <li class='nav-item'><a class='nav-link' href='Login.php'>Log In</a></li>";
-                    echo " <li class='nav-item'><a class='nav-link' href='Signup.php'>Sign Up</a></li>";
+                {?>
+                    <li class='nav-item'><a class='nav-link active' href='index.php'>Cemetery</a></li>
+                    <li class='nav-item'><a class='nav-link' href='Login.php'>Log In</a></li>
+                    <li class='nav-item'><a class='nav-link' href='Signup.php'>Sign Up</a></li>
+                
+                <?php 
                 }
                 ?>
        
     </ul>
+   
+        
+    </div>

@@ -1,14 +1,11 @@
 <?php
 //insert.php
-if(isset($_POST["subject"]))
+if(isset($_POST["post_name"]))
 {
- include("connect.php");
- $subject = mysqli_real_escape_string($connect, $_POST["subject"]);
- $comment = mysqli_real_escape_string($connect, $_POST["comment"]);
- $query = "
- INSERT INTO comments(comment_subject, comment_text)
- VALUES ('$subject', '$comment')
- ";
- mysqli_query($connect, $query);
+ $connect = mysqli_connect("localhost", "root", "", "cemetery2");
+ $post_name = mysqli_real_escape_string($connect, $_POST["post_name"]);
+ $sql = "INSERT INTO admin (username) VALUES ('".$post_name."')";
+ mysqli_query($connect, $sql);
 }
+
 ?>

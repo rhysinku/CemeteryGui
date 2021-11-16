@@ -1,115 +1,232 @@
-<body><title>Project</title>
-  <script>
-      var Meter_No = []; 
-      var Present_Reading = []; 
-      var Previous_Reading = []; 
-      var Type_of_Registration = [];
-      var Consumption_Reading = []; 
-      var Electricty_Charge = [];
-      var Demand_Charge_Type = []; 
-      var Service_Charge_Type = []; 
-      var Principal_Amount = []; 
-      var Amount_Payable = [];
-      var insert;
-      var counter;
-      var Vat = 0.5;
-      function MAIN(){       
-          let CHOICE = window.prompt("MENU \n1.ADD\n2.SEARCH\n3.DISPLAY ALL\n4.EXIT\nCHOOSE:");
-          switch(CHOICE) {
-              case '1':
-                  ADD();
-                  break;
-              case '2':
-                  SEARCH();
-                  break;
-              case '3':
-                  DISPLAY();
-                  break;
-              case '4':
-                  throw new Error('exit');
-                  break;
-              default:
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+    <script>
+          function Menu(){
+            let counter = 0 , exit = false;
+            const amounts = [];
+
+            while(!exit){
+                let Choice = window.prompt("Main Menu \n1. Add\n2. Search\n3. Display All\n4. Exit\n");
+                switch(Choice) {
+                    case '1':
+                        if(counter < 10){
+                            Add(amounts);
+                            counter++;
+
+                            let Transaction = true;
+                            while(Transaction){
+                                if(!Transaction){
+                                    break;
+                                }
+                                option = window.prompt("Do another transaction?\n 1. Yes \n 2. No");
+                                option = option.toLowerCase();
+                                let isCorrect = false;
+
+                                while(!isCorrect){
+                                    switch(option) {
+                                        case '1':
+                                            Transaction = true;
+                                            isCorrect = true;
+                                            if(counter < 10){
+                                                Add(amounts);
+                                                counter++;
+                                            }else{
+                                                Transaction = false;
+                                                window.alert("Reach Limit: 10");
+                                            }
+                                            break;
+                                        case 'yes':
+                                            Transaction = true;
+                                            isCorrect = true;
+                                            if(counter < 10){
+                                                Add(amounts);
+                                                counter++;
+                                            }else{
+                                                Transaction = false;
+                                                window.alert("Reach Limit: 10");
+                                            }
+                                            break;
+                                        case '2':
+                                            Transaction = false;
+                                            isCorrect = true;
+                                            break;
+                                        case 'no':
+                                            Transaction = false;
+                                            isCorrect = true;
+                                            break;
+                                        default:
+                                            option = window.prompt("Invalid Input \n Try Again?\n 1. Yes \n 2. No");
+                                            option = option.toLowerCase();
+                                    }
+                                }
+                            }
+
+                        }else{
+                            window.alert("Reach Limit: 10.");
+                        }
+                        break;
+                    case '2':
+                        Search(amounts);
+                        break;
+
+                    case '3':
+                        DisplayAmount(amounts);
+                        break;
+
+                    case '4':
+                        exit = true;
+						break;
+						
+                    default:
+                        window.alert("Wrong Input..");
+                        exit = true;
+                }
+            }
           }
-      }
-      function ADD(){
-          for(var i=0; i < 10; i++){
-          insert = window.prompt("METER NUMBER: ");
-          insert= parseInt(insert);
-          Meter_No.push(insert);
-          insert = window.prompt("PRESENT READING: ");
-          insert= parseInt(insert);
-          Present_Reading.push(insert);
-          insert = window.prompt("PREVIOUS READING: ");
-          insert= parseInt(insert);
-          Previous_Reading.push(insert);
-          insert = window.prompt("TYPE OF REGISTRATION:\n1.HOME\n2.BUSINESS");
-          switch(insert) {
-              case '1':
-              Type_of_Registration.push("HOME");2
-              Demand_Charge_Type.push(20);
-              Service_Charge_Type.push(5);
-              break;
-              case '2':
-              Type_of_Registration.push("BUSINESS");
-              Demand_Charge_Type.push(40);
-              Service_Charge_Type.push(10);
-              break;
-              default:
+
+          function Add(amounts){
+                MeterNum = window.prompt("Meter Number: ");
+                MeterNum = parseInt(MeterNum);
+
+                PresentRead = window.prompt("Present Reading: ");
+                PresentRead = parseInt(PresentRead);
+
+                PreviousRead = window.prompt("Previous Reading: ");
+                PreviousRead = parseInt(PreviousRead);
+
+                let isCorrect = false;
+                RegType = window.prompt("Type of Registration:\n1.Home\n2.Business");
+                RegType = RegType.toLowerCase();
+
+                while(!isCorrect){
+                    switch(RegType) {
+                        case '1':
+                            RegType = "home";
+                            isCorrect = true;
+                            break;
+                        case 'home':
+                            RegType = "home";
+                            isCorrect = true;
+                            break;
+                        case '2':
+                            RegType = "business";
+                            isCorrect = true;
+                            break;
+                        case 'business':
+                            RegType = "business";
+                            isCorrect = true;
+                            break;
+                        default:
+                            RegType = window.prompt("Invalid input! Please try again.\nType of Registration:\n1.Home\n2.Business");
+                            RegType = RegType.toLowerCase();
+                    }
+                }
+
+              let amount = new Electrical(MeterNum, PresentRead, PreviousRead, RegType);
+              amount.ConsumptionReading();
+              amount.ElectricityCharge();
+              amount.DemandChargeType();
+              amount.PrincipalAmount();
+              amount.AmountPayable();
+              amounts.push(amount)
           }
-          Consumption_Reading.push(Present_Reading[i] - Previous_Reading[i]);
-          if(Consumption_Reading[i] < 72){
-              Electricty_Charge.push(2.50);
-          }else if(Consumption_Reading[i] <= 150){
-              Electricty_Charge.push(3.50);
-          }else if(Consumption_Reading[i] <= 300){
-              Electricty_Charge.push(4.50);
-          }else if(Consumption_Reading[i] <= 400){
-              Electricty_Charge.push(5.50);
-          }else if(Consumption_Reading[i] <= 500){
-              Electricty_Charge.push(6.00);
-          }else{
-              Electricty_Charge.push(6.50);
+
+          function Search(amounts){
+              if(amounts.length === 0){
+                window.alert("No current data yet to search. Please add a data.");
+              }else{
+                toSearch = window.prompt("Enter Meter Number to search: ");
+                toSearch = parseInt(toSearch);
+                amount = amounts.find(o => o.MeterNum === toSearch);
+
+                if(typeof amount === 'undefined'){
+                    window.alert("Meter Number not found!");
+                }else{
+                    window.alert(Amount(amount));
+                }
+              }
           }
-          Principal_Amount.push(Electricty_Charge[i] + Demand_Charge_Type[i] + Service_Charge_Type[i]);
-          Amount_Payable.push(Principal_Amount[i] + (Principal_Amount[i] * Vat)); 
-         // counter++;           
-          }   
-      MAIN();  
-      }
-      function SEARCH(){
-          var search = window.prompt("Search Meter Number: ");
-          for(var i=0; i < Meter_No.length; i++){
-              if(parseInt(Meter_No[i]) == search){
-                  window.alert("Meter Number: " + Meter_No[i] 
-                  + "\nPresent Reading: " + Present_Reading[i]
-                  + "\nPrevious Reading: " + Previous_Reading[i]
-                  + "\nType of Registration: " + Type_of_Registration[i]
-                  + "\nConsumption Reading: " + Consumption_Reading[i]
-                  + "\nConsumption Reading: " + Electricty_Charge[i]
-                  + "\nDemand Charge: " + Demand_Charge_Type[i]
-                  + "\nService Charge: " + Service_Charge_Type[i]
-                  + "\nPrincipal Amount: " + Principal_Amount[i]
-                  + "\nAmount Payable: " + Amount_Payable[i]); 
-                  break;
-              }             
+
+          function DisplayAmount(amounts){
+            let text = "No current data.";
+            if(amounts.length!=0){
+                text = "";
+                for(var i=1; i <= amounts.length; i++){
+                    window.alert("\nDisplay No. " + i + Amount(amounts[i-1]));
+                }
+            }else{
+                window.alert(text);
+            }
           }
-          MAIN();
-      }
-      function DISPLAY(){
-          for(var i=0; i < 10; i++){
-              window.alert("Meter Number: " + Meter_No[i] 
-              + "\nPresent Reading: " + Present_Reading[i]
-              + "\nPrevious Reading: " + Previous_Reading[i]
-              + "\nType of Registration: " + Type_of_Registration[i]
-              + "\nConsumption Reading: " + Consumption_Reading[i]
-              + "\nConsumption Reading: " + Electricty_Charge[i]
-              + "\nDemand Charge: " + Demand_Charge_Type[i]
-              + "\nService Charge: " + Service_Charge_Type[i]
-              + "\nPrincipal Amount: " + Principal_Amount[i]
-              + "\nAmount Payable: " + Amount_Payable[i]);
+
+          function Amount(amount){
+            let text = "\nMeter Number: " + amount.MeterNum
+            + "\nPresent Reading: " + amount.PresentRead
+            + "\nPrevious Reading: " + amount.PreviousRead
+            + "\nType of Registration: " + amount.RegType
+            + "\nConsumption Reading: " + amount.ConsumptionReading
+            + "\nElectricity Charge: " + amount.ElectricityCharge
+            + "\nDemand Charge: " + amount.DemandCharge
+            + "\nService Charge: " + amount.ServiceCharge
+            + "\nPrincipal Amount: " + amount.PrincipalAmount
+            + "\nAmount Payable: " + amount.AmountPayable;
+            return text;
           }
-          MAIN();
-      }
-      MAIN();
-  </script>
+
+		  class Electrical {
+              constructor(MeterNum, PresentRead, PreviousRead, RegType){
+                  this.MeterNum = MeterNum;
+                  this.PresentRead = PresentRead;
+                  this.PreviousRead = PreviousRead;
+                  this.RegType = RegType;
+              }
+
+              ConsumptionReading(){
+                this.ConsumptionReading = this.PresentRead - this.PreviousRead;
+              }
+
+              ElectricityCharge(){
+                if(this.ConsumptionReading < 72){
+                    this.ElectricityCharge = this.ConsumptionReading * 2.5;
+                }else if(this.ConsumptionReading <= 150){
+                    this.ElectricityCharge = this.ConsumptionReading * 3.5;
+                }else if(this.ConsumptionReading <= 300){
+                    this.ElectricityCharge = this.ConsumptionReading * 4.5;
+                }else if(this.ConsumptionReading <= 400){
+                    this.ElectricityCharge = this.ConsumptionReading * 5.5;
+                }else if(this.ConsumptionReading <= 500){
+                    this.ElectricityCharge = this.ConsumptionReading * 6;
+                }else{
+                    this.ElectricityCharge = this.ConsumptionReading * 6.5;
+                }
+              }
+
+              DemandChargeType(){
+                if(this.RegType == 'home'){
+                    this.DemandCharge = 20;
+                    this.ServiceCharge = 5;
+                }else{
+                    this.DemandCharge = 40;
+                    this.ServiceCharge = 10;
+                }
+              }
+
+              PrincipalAmount(){
+                this.PrincipalAmount = this.ElectricityCharge + this.DemandCharge + this.ServiceCharge;
+              }
+
+              AmountPayable(){
+                this.vat = this.PrincipalAmount * 0.05;
+                this.AmountPayable = this.PrincipalAmount + this.vat;
+              }
+			  
+          }
+          Menu();
+
+    </script>
+
 </body>
+</html>
