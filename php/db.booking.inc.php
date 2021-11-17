@@ -45,6 +45,6 @@ if (isset($_POST["draft"]))
         $sql = "INSERT INTO booking (userid, corpse, dateBirth, dateDeath, corpseAddress, corpseReligion, payment)
                 VALUES ('$userId','$corpse','$dob','$dod','$address','$religion' , '$payment')";
         mysqli_query($conn,$sql);
-        header("Location: ../Booking.php?msg=Draft");
+        header("Location: ../Profile.php?msg=Draft");
    
 }

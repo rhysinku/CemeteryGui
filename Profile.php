@@ -148,22 +148,86 @@ include_once 'php/db.profile.inc.php';
                                     </div>
                                 </div>
                             </div>
-                            <div><a type="hidden" class="btn btn-primary btn-lg" role="button" href="#edit" data-bs-toggle="modal">Edit</a>
-                                <div class="modal fade" role="dialog" tabindex="-1" id="edit">
+                            <?php if($view['payment'] == 'queue' || $view['adminapprove'] == 'Not Approve')
+                            {
+                                $style = "";
+                            }
+                            else
+                            {
+                                $style = "visibility:hidden";
+                            }
+                            ?>
+
+                            <div  style="<?php echo $style ?>" >
+                                <a type="hidden" class="btn btn-primary btn-lg" role="button" href="#edit<?php echo $view['id'];?>" data-bs-toggle="modal">Edit</a>
+                                <div class="modal fade" role="dialog" tabindex="-1" id="edit<?php echo $view['id'];?>">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                                <h4>Modal Title</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                <h4><?php echo $_SESSION['user'];?>'s Transaction </h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                             </div>
                                             <div class="modal-body">
-                                                <p class="text-center text-muted">Description </p>
+                                                <p class="text-center text-muted"> ID <?php echo $view['id'];?> </p>
+                                                <div class="d-flex justify-content-center" style="padding: 23px;"> 
+                                                <!-- Form -->
+                            <form method="POST" action="php/profilePayment.inc.php" class="d-flex flex-column" style="background: linear-gradient(133deg, black, rgb(7,8,48) 100%), rgb(33,37,41);text-align: center;padding: 18px;border-radius: 33px;color: rgb(13,110,253);font-size: 11px;" method="post">
+                                <div class="table-responsive" style="border-style: none;border-bottom-style: none;">
+                                    <table class="table">
+                                        <thead>
+                                            <tr></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td style="border-bottom-style: none;width: 298px;">
+                                                    <div class="table-responsive" style="border-style: none;color: rgb(13, 110, 253);">
+                                                        <table class="table">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="border-style: none;">
+                                                                        <header><label class="form-label" style="color: rgb(249,249,249);font-size: 16px;">GCash Payment</label></header>
+                                                                    </td>
+                                                                    <td style="border-style: none;">
+                                                                        <header><label class="form-label" style="color: rgb(249,249,249);font-size: 33px;"></label></header>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr style="color: rgb(249,251,252);">
+                                                                    <td class="d-flex flex-column" style="border-style: none;"><label class="form-label">Cost: Php 500.00</label><label class="form-label">Send to : 09273743328</label></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border-style: none;">
+                                                                    <input type="text" name= "pID" value ="<?php echo $view['id'];?>">
+                                                                    <input type="text" name= "profile" value ="<?php echo $_SESSION['user'];?>">
+                                                                    <input name= "gcash" class="form-control form-control-lg" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Gcash Number" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;font-size: 13px;" title="Gcash Number"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border-style: none;">
+                                                                    <input name="accountpass" class="form-control form-control-lg" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Account Password" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;font-size: 13px;" title="Account Password"></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="border-style: none;">
+                                                                        <div><button name="pay" type="submit" class="btn btn-primary btn-lg" role="button" style="font-size: 11px;"><a>Continue</a></button>
+                                                                            
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </td>
+                                                <td class="d-flex" style="border-bottom-style: none;"><img src="./assets/img/Gcash.jpg" loading="auto" width="170px" style="border-bottom-style: none;"></td>
+                                            </tr>
+                                            <tr></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
                                             </div>
-                                            <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Close</button> 
-                                            <button class="btn btn-primary" type="button">Save</button></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                         
                         </td>
                     </tr>
                     <?php } ?>
