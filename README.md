@@ -4,5 +4,10 @@ Cemtery with Gui
 
 Argao Cemetery Capstone Project
 
-Frontend: Rhysin
-Backend: Rhysin
+- [x] Frontend: Rhysin
+
+- [x] Backend: Rhysin
+
+- [x] Miscellaneous: Kyle
+
+- [x] Documentation: Mark
