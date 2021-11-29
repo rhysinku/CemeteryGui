@@ -58,7 +58,7 @@ include_once 'admin.header.php';
     </div>
     <div style="margin: 25px;">
         <div class="table-responsive">
-            <table class="table">
+            <table id="example" class="table">
                 <thead>
                     <tr>
                         <th>Number</th>
@@ -71,6 +71,8 @@ include_once 'admin.header.php';
                         <th style="text-align: center;">Action</th>
                     </tr>
                 </thead>
+               
+                <tbody>
                 <?php
         $usernum = 1;
         $tableview = $conn->query("SELECT * FROM corpse");
@@ -79,9 +81,7 @@ include_once 'admin.header.php';
             $dob = date(" F, d, Y   ",strtotime($view['cdob'])) ; 
             $dod= date(" F, d, Y",strtotime($view['cdod'])) ; 
             //     Y/F/d 
-
         ?>
-                <tbody>
                     <tr>
                         <td> <?php echo $usernum++; ?> </td>
                         <td> <?php echo $view['cfname']; ?> </td>
@@ -162,7 +162,6 @@ include_once 'admin.header.php';
                                     </div>
                                 </div>
                             </div>
-                           
                         </td>   
                     </tr>
                     <?php } ?>
@@ -170,6 +169,18 @@ include_once 'admin.header.php';
             </table>
         </div>
     </div>
+
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+    $('#example').DataTable({
+        "paging":   false,
+        "ordering": false,
+        "info":     false
+
+    });
+} );
+    </script>
     <?php
 include_once 'admin.footer.php';
 ?>

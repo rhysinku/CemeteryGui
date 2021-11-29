@@ -14,30 +14,30 @@ include_once 'header.php';
                         </tr>
                         <tr>
                             <td style="border-style: none;"><input type ="hidden" name ="id" value ="<?php echo @$_SESSION['userId'] ?>"/>  
-                            <input class="form-control form-control-lg" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Name of Corpse" name="corpse" id="corpse" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;" title="Input Username"></td>
+                            <input class="form-control form-control-lg" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Name of Corpse" name="corpse" id="corpse" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;" title="Name of Corpse" required></td>
                         </tr>
                         <tr>
                             <td style="border-style: none;">
                             <label class="form-label" style="color: rgb(255,255,255);">Date of Birth</label>
-                            <input class="form-control" type="date" name="dob"  id="dob" style="color: rgb(255,255,255);background: rgba(255,255,255,0);border-style: none;"></td>
+                            <input class="form-control" type="date" name="dob"  id="dob" style="color: rgb(255,255,255);background: rgba(255,255,255,0);border-style: none;" required></td>
                         </tr>
                         <tr>
                             <td style="border-style: none;">
                             <label class="form-label" style="color: rgb(255,255,255);">Date of Death</label>
-                            <input class="form-control" type="date" name="dod" id="dod" style="color: rgb(255,255,255);background: rgba(255,255,255,0);border-style: none;"></td>
+                            <input class="form-control" type="date" name="dod" id="dod" style="color: rgb(255,255,255);background: rgba(255,255,255,0);border-style: none;" required></td>
                         </tr>
                         <tr>
                             <td style="border-style: none;">
-                            <input class="form-control form-control-lg" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Address" name="address" id="address" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;" title="Input First Name"></td>
+                            <input class="form-control form-control-lg" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Address" name="address" id="address" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;" title="Address" required></td>
                         </tr>
                         <tr>
                             <td style="border-style: none;">
-                            <input class="form-control form-control-lg" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Religion" name="religion" id="religion" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;" title="Input Last Name"></td>
+                            <input class="form-control form-control-lg" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Religion" name="religion" id="religion" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;" title="Religion" required></td>
                         </tr>
                         <tr>
                             <td style="border-style: none;">
                             
-                                <div><a class="btn btn-primary btn-lg" role="button" id="preview" href="#myModal" data-bs-toggle="modal">Preview</a>
+                                <div><a type="submit" class="btn btn-primary btn-lg" role="button" id="preview" href="#myModal" data-bs-toggle="modal">Preview</a>
                                     <div class="modal fade" role="dialog" tabindex="-1" id="myModal">
                                         <div class="modal-dialog" role="document">
                                             <div class="modal-content">

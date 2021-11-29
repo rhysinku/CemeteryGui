@@ -1,6 +1,53 @@
 <?php
 session_start();
 
+if(isset($_GET["error"]))
+{
+    if ($_GET["error"] == "InvalidAccount")
+    {
+        $error =" <p class='font-monospace text-center text-danger'> Invalid Account </p>";
+    }
+
+    if ($_GET["error"] == "Success")
+    {
+        $error =" <p class='font-monospace text-center text-danger'> Account Created </p>";
+    }
+
+    if ($_GET["error"] == "PasswordError")
+    {
+        $error =" <p class='font-monospace text-center text-danger'> Password did not Match </p>";
+    }
+
+    if ($_GET["error"] == "LogOut")
+    {
+        $error =" <p class='font-monospace text-center text-danger'> Account Has Been Log Out </p>";
+    }
+
+    if ($_GET["error"] == "IncorrectPass")
+    {
+        $error =" <p class='font-monospace text-center text-danger'> Incorrect Password </p>";
+    }
+}
+
+elseif(isset($_GET["succ"])){
+
+    if ($_GET["succ"] == "BookSuc")
+    {
+        $error =" <p class='font-monospace text-center text-success'> Booking Success </p>";
+    }    
+    if ($_GET["succ"] == "PaySuc")
+    {
+        $error =" <p class='font-monospace text-center text-success'> Booking Updated Succesfully </p>";
+    }  
+
+}
+
+else
+{
+    $error ="";
+}
+
+
 ?>
 
 <!DOCTYPE html>
@@ -15,6 +62,8 @@ session_start();
     <link rel="stylesheet" href="assets/css/Map-Clean.css">
     <link rel="stylesheet" href="assets/css/mine.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+
 </head>
 
 <body>
@@ -36,5 +85,4 @@ session_start();
                 ?>
        
     </ul>
-
-    <!-- <h1>ERROR</h1> -->
+<?php echo $error; ?>

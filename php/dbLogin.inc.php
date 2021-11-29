@@ -23,17 +23,17 @@ require_once 'connection.php';
         }
         if($_SESSION['user'] == "Admin" || $_SESSION['user'] == "admin")
         {
-        header("Location: ../admin/admin.php?disp=Admin"); 
+        header("Location: ../admin/admin.php?succ=Adminlogin"); 
         }
         else{
 
-        header("Location: ../index.php?error=Success"); 
+        header("Location: ../index.php?succ=Userlogin"); 
          }
     }
 
     else
     {
-        header("Location: ../LogIn.php?error=Invalid Account"); 
+        header("Location: ../LogIn.php?error=InvalidAccount"); 
     }
     
    

@@ -16,6 +16,10 @@
 </head>
 <?php 
 $idurl = $_GET['ID'];
+$nameurl = $_GET['Name'];
+$connect = mysqli_connect("localhost", "root", "", "cemetery");
+
+
 ?>
 <body>
     <div class="d-flex justify-content-center" style="padding: 89px;">
@@ -30,24 +34,27 @@ $idurl = $_GET['ID'];
                         </tr>
                         <tr>
                             <td style="border-style: none;">
-                            <input type="text" name="id" value="<?php echo $idurl; ?>" />
+                            <input type="hidden" name="id" value="<?php echo $idurl; ?>" />
                                 <h1 class="text-primary">Admin Approval</h1>
                             </td>
                         </tr>
                         <tr>
                             <td style="border-style: none;">
-                                <p class="text-secondary">Name want to Confirm its Payment</p>
+                                <p class="text-secondary"><?php echo $nameurl; ?> want to Confirm its Payment</p>
                             </td>
                         </tr>
                         <tr>
                             <td class="d-flex flex-column" style="border-style: none;">
                             <button class="btn btn-success" type="submit" style="margin: 4px;" name="yes"><span>I receive the payment</span></button>
-                            <button class="btn btn-danger text-center d-flex flex-column" type="submit" name="no" style="margin: 4px;"><span>I did not receive the payment</span></button></td>
+                            <button class="btn btn-danger text-center d-flex flex-column" type="submit" name="no" style="margin: 4px;"><span>I did not receive the payment</span></button>
+                            <a href="admin.php" class="btn btn-light"> Close </a>
+                        </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </form>
+      
     </div>
     <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 </body>

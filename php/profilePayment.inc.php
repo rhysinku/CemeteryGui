@@ -21,7 +21,7 @@ if (isset($_POST['pay']))
         if(mysqli_query($conn,$sql2))
         {
             //echo mysqli_errno($conn); MY LIFE SAVER
-            header("Location: ../Profile.php?error=Success");
+            header("Location: ../Profile.php?succ=PaySuc");
             
         }
 

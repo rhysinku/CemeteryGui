@@ -4,6 +4,9 @@ require_once 'connection.php';
 
 if(isset($_POST["submit"]))
 {
+
+
+   
     $username = $_POST["username"];
     $fname = $_POST["fname"];
     $lname = $_POST["lname"];
@@ -13,16 +16,17 @@ if(isset($_POST["submit"]))
     $password = $_POST["password"];
     $rpassword = $_POST["rpassword"];
 
-
-
-        $sql = "INSERT INTO user (userName, userFname, userLname,userContact,userAddress,userMail,userPwd)
-                          VALUES ('$username','$fname','$lname','$num','$address','$email','$password')";
+    if ( $password== $rpassword)
+    {
+           $sql = "INSERT INTO user (userName, userFname, userLname,userContact,userAddress,userMail,userPwd)
+                VALUES ('$username','$fname','$lname','$num','$address','$email','$password')";
         $conn->query($sql);
         header("Location: ../index.php?error=Success");
-   
-
-   
-    
+    }
+    else{
+        header("Location: ../Signup.php?error=PasswordError");
+    }
+       
 }
 else
 {

@@ -4,10 +4,13 @@ include_once 'header.php';
 include_once 'php/db.profile.inc.php';
 
 ?>
+
+
+    
     <div style="margin: 53px;">
     <h1><?php echo @ $_SESSION["user"] ?>'s Profile ('#<?php echo @ $_SESSION["userId"] ?>')</h1>
         <div class="table-responsive">
-            <table class="table">
+            <table class="table" >
                 <thead>
                     <tr></tr>
                 </thead>
@@ -195,13 +198,13 @@ include_once 'php/db.profile.inc.php';
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="border-style: none;">
-                                                                    <input type="text" name= "pID" value ="<?php echo $view['id'];?>">
-                                                                    <input type="text" name= "profile" value ="<?php echo $_SESSION['user'];?>">
+                                                                    <input type="hidden" name= "pID" value ="<?php echo $view['id'];?>">
+                                                                    <input type="hidden" name= "profile" value ="<?php echo $_SESSION['user'];?>">
                                                                     <input name= "gcash" class="form-control form-control-lg" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Gcash Number" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;font-size: 13px;" title="Gcash Number"></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="border-style: none;">
-                                                                    <input name="accountpass" class="form-control form-control-lg" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Account Password" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;font-size: 13px;" title="Account Password"></td>
+                                                                    <input name="accountpass" class="form-control form-control-lg" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Account Password" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;font-size: 13px;" title="Account Password"></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="border-style: none;">

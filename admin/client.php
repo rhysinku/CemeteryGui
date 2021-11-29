@@ -77,7 +77,7 @@ include_once 'admin.header.php';
     </div>
     <div style="margin: 25px;">
         <div class="table-responsive">
-            <table class="table">
+            <table class="table" id="example">
                 <thead>
                     <tr>
                         <th>Number</th>
@@ -89,6 +89,7 @@ include_once 'admin.header.php';
                         <th style="text-align: center;">Action</th>
                     </tr>
                 </thead>
+                <tbody>
                 <?php
         $usernum = 1;
         $tableview = $conn->query("SELECT * FROM user");
@@ -97,7 +98,6 @@ include_once 'admin.header.php';
             //     Y/F/d 
 
         ?>
-                <tbody>
                     <tr>
                         <td> <?php echo $usernum++; ?> </td>
                         <td> <?php echo $view['userName']; ?> </td>
@@ -195,7 +195,16 @@ include_once 'admin.header.php';
     </div>
 
 
+<script type="text/javascript">
+        $(document).ready(function() {
+    $('#example').DataTable({
+        "paging":   false,
+        "ordering": false,
+        "info":     false
 
+    });
+} );
+    </script>
     <?php
 include_once 'admin.footer.php';
 ?>

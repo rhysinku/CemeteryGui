@@ -32,10 +32,10 @@ include_once 'header.php';
                                                 <input type="hidden" name="profile" value = "<?php echo$_SESSION["user"] ?>"> 
                                                 <input type="hidden" name="id" value = "<?php echo$_SESSION["payid"] ?>"> 
                                                
-                                                <td style="border-style: none;"><input name ="gcash" class="form-control form-control-lg" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Gcash Number" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;" title="Gcash Number"></td>
+                                                <td style="border-style: none;"><input name ="gcash" class="form-control form-control-lg" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Gcash Number" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;" title="Gcash Number" required></td>
                                             </tr>
                                             <tr>
-                                                <td style="border-style: none;"><input  name ="accpass" class="form-control form-control-lg" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Account Password" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;" title="Account Password"></td>
+                                                <td style="border-style: none;"><input  name ="accpass" class="form-control form-control-lg" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Account Password" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;" title="Account Password" required></td>
                                             </tr>
                                             <tr>
                                                 <td style="border-style: none;">
