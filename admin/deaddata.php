@@ -164,7 +164,8 @@ include_once 'admin.header.php';
                             </div>
                         </td>   
                     </tr>
-                    <?php } ?>
+                    <?php 
+                } ?>
                 </tbody>
             </table>
         </div>
@@ -179,7 +180,7 @@ include_once 'admin.header.php';
         "info":     false
 
     });
-} );
+         });
     </script>
     <?php
 include_once 'admin.footer.php';

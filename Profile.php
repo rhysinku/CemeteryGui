@@ -142,6 +142,24 @@ include_once 'php/db.profile.inc.php';
                                         <td>Admin Appovement</td>
                                         <td><?php echo $view['adminapprove']; ?></td>
                                     </tr>
+                                    <tr>
+                                        <td>Screenshot</td>
+                                        <?php 
+                                        if ($view['bookimg'] == "")
+                                        { ?>
+
+                                            <td>No ScreenShot</td>
+                                    <?php
+                                        }
+                                        else
+                                        {?>
+                                     <td><img src="./assets/imageDb/<?php echo $view['bookimg'];?>" width="100%" height="100%"> </td>
+
+                                    <?php
+                                        }
+                                        ?>
+                                    </tr>
+                                    
                                 </tbody>
                             </table>
                         </div>
@@ -173,7 +191,7 @@ include_once 'php/db.profile.inc.php';
                                                 <p class="text-center text-muted"> ID <?php echo $view['id'];?> </p>
                                                 <div class="d-flex justify-content-center" style="padding: 23px;"> 
                                                 <!-- Form -->
-                            <form method="POST" action="php/profilePayment.inc.php" class="d-flex flex-column" style="background: linear-gradient(133deg, black, rgb(7,8,48) 100%), rgb(33,37,41);text-align: center;padding: 18px;border-radius: 33px;color: rgb(13,110,253);font-size: 11px;" method="post">
+                            <form enctype="multipart/form-data" method="POST" action="php/profilePayment.inc.php" class="d-flex flex-column" style="background: linear-gradient(133deg, black, rgb(7,8,48) 100%), rgb(33,37,41);text-align: center;padding: 18px;border-radius: 33px;color: rgb(13,110,253);font-size: 11px;" method="post">
                                 <div class="table-responsive" style="border-style: none;border-bottom-style: none;">
                                     <table class="table">
                                         <thead>
@@ -200,12 +218,19 @@ include_once 'php/db.profile.inc.php';
                                                                     <td style="border-style: none;">
                                                                     <input type="hidden" name= "pID" value ="<?php echo $view['id'];?>">
                                                                     <input type="hidden" name= "profile" value ="<?php echo $_SESSION['user'];?>">
-                                                                    <input name= "gcash" class="form-control form-control-lg" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Gcash Number" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;font-size: 13px;" title="Gcash Number"></td>
+                                                                    <input name= "gcash" class="form-control form-control-lg" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Gcash Number" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;font-size: 13px;" title="Gcash Number" required onkeypress="return valNum(event)"></td>
                                                                 </tr>
                                                                 <tr>
                                                                     <td style="border-style: none;">
-                                                                    <input name="accountpass" class="form-control form-control-lg" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Account Password" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;font-size: 13px;" title="Account Password"></td>
+                                                                    <input name="accountpass" class="form-control form-control-lg" type="password" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Account Password" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;font-size: 13px;" title="Account Password">
+                                                                </td>
                                                                 </tr>
+                                                                <tr>
+                                                                <td style="border-style: none;">
+                                                                <input id="inputimg" onchange="imgval()" name="bookimg" class="form-control form-control-sm" type="file" required accept="image/png, image/jpg, image/jpeg">
+                                                                <span id='message'></span>
+                                                                </td>
+                                                            </tr>
                                                                 <tr>
                                                                     <td style="border-style: none;">
                                                                         <div><button name="pay" type="submit" class="btn btn-primary btn-lg" role="button" style="font-size: 11px;"><a>Continue</a></button>
@@ -238,6 +263,32 @@ include_once 'php/db.profile.inc.php';
             </table>
         </div>
     </div>
+
+    <script>
+         function imgval(){
+            var img = document.getElementById("inputimg").value;
+            var imgtype = img.lastIndexOf(".")+1;
+            var fileimg = img.substr(imgtype, img.lenght).toLowerCase();
+            if(fileimg =="jpg" || fileimg =="jpeg" || fileimg =="png")
+            {
+                document.getElementById('message').style.color = 'green';
+                document.getElementById('message').innerHTML = 'Correct Image Format';
+            }
+            else
+            {
+                document.getElementById('message').style.color = 'red';
+                document.getElementById('message').innerHTML = 'Incorrect Format Image';
+            }
+
+        }
+
+        function valNum(e)
+        {
+            const pattern = /^[0-9]$/;
+            return pattern.test(e.key)
+        }
+
+    </script>
 
     <?php
 include_once 'footer.php';

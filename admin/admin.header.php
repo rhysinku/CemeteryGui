@@ -40,8 +40,9 @@ include '../php/connection.php';
                     ?>
                     <li class='nav-item'><a class='nav-link active' href='admin.php'>Cemetery</a></li>
                     <li class='nav-item'><a class='nav-link' href='#'><?php echo $_SESSION["user"]; ?></a></li>
-                    <li class='nav-item'><a class='nav-link' href='deaddata.php'>Config</a></li>";
-                    <li class='nav-item'><a class='nav-link' href='client.php'>Client</a></li>";
+                    <li class='nav-item'><a class='nav-link' href='deaddata.php'>Config</a></li>
+                    <li class='nav-item'><a class='nav-link' href='client.php'>Client</a></li>
+                    <li class='nav-item'><a class='nav-link' href='transactionHis.php'>Transaction</a></li>
                     <li class="nav-item">
                     <div class="nav-item dropdown">
                     <button class="btn btn-primary dropdown-toggle" aria-expanded="false" data-bs-toggle="dropdown" type="button">

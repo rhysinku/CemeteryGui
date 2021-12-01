@@ -17,46 +17,128 @@
 <?php 
 $idurl = $_GET['ID'];
 $nameurl = $_GET['Name'];
-$connect = mysqli_connect("localhost", "root", "", "cemetery");
-
-
-?>
+$conn = mysqli_connect("localhost", "root", "", "cemetery");?> 
 <body>
-    <div class="d-flex justify-content-center" style="padding: 89px;">
-        <form method="post" action="./adminphp/adminApproval.inc.php" class="d-flex flex-column" style="background: rgb(33,37,41);text-align: center;padding: 51px;border-radius: 33px;color: rgb(13,110,253);" method="post">
-            <div class="table-responsive" style="border-style: none;color: rgb(13, 110, 253);">
+
+<div style="padding: 18px;background: linear-gradient(133deg, black, rgb(7,8,48) 100%), rgb(33,37,41);color: rgb(255,255,255);margin: 12px;">
+        <h1>Form Content:</h1>
+        <div class="table-responsive" style="color: rgb(255,255,255);">
+            <table class="table">
+                <thead>
+                    <?php
+                        $sql="SELECT * FROM booking WHERE id = '$idurl'";
+                        $result =mysqli_query($conn,$sql);
+
+                        while($data = mysqli_fetch_assoc($result))
+                        {
+                            $dob = date(" F, d, Y",strtotime($data['dateBirth']));
+                            $dod = date(" F, d, Y",strtotime($data['dateDeath']));
+
+                            
+                            ?>
+                        
+                
+                    <tr>
+                        <th style="color: rgb(255,255,255);border-style: none;">Corpse</th>
+                        <th style="color: rgb(255,255,255);border-style: none;"><?php echo $data['corpse']; ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="color: rgb(255,255,255);border-style: none;">
+                        <td style="color: rgb(255,255,255);border-style: none;">Date of Birth</td>
+                        <td style="color: rgb(255,255,255);border-style: none;"><?php echo $dob; ?></td>
+                    </tr>
+                    <tr style="color: rgb(255,255,255);border-style: none;">
+                        <td style="color: rgb(255,255,255);border-style: none;">Date of Death</td>
+                        <td style="color: rgb(255,255,255);border-style: none;"><?php echo $dod; ?></td>
+                    </tr>
+                    <tr style="color: rgb(255,255,255);border-style: none;">
+                        <td style="color: rgb(255,255,255);border-style: none;">Corpse Address</td>
+                        <td style="color: rgb(255,255,255);border-style: none;"><?php echo $data['corpseAddress']; ?></td>
+                    </tr>
+                    <tr style="color: rgb(255,255,255);border-style: none;">
+                        <td style="color: rgb(255,255,255);border-style: none;">Corpse Religion</td>
+                        <td style="color: rgb(255,255,255);border-style: none;"><?php echo $data['corpseReligion']; ?></td>
+                    </tr>
+                    <tr style="color: rgb(255,255,255);border-style: none;">
+                        <td style="color: rgb(255,255,255);border-style: none;">Payment</td>
+                        <td style="color: rgb(255,255,255);border-style: none;"><?php echo $data['payment']; ?></td>
+                    </tr>
+                    <tr style="color: rgb(255,255,255);border-style: none;">
+                        <td style="color: rgb(255,255,255);border-style: none;">Gcash Number</td>
+                        <td style="color: rgb(255,255,255);border-style: none;"><?php echo $data['gcash']; ?></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <p>Sent Screenshot:</p>
+        <div style="width: 264.656px;">
+            <div class="modal fade" role="dialog" tabindex="-1" id="myModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="display-5 text-primary"><?php echo $nameurl; ?>'s Screenshot</h4><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body d-flex justify-content-center">
+                            <img src="../assets/imageDb/<?php echo $data['bookimg']; ?>"  width="200%"  height="100%"> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex align-content-center justify-content-md-center"><a href="#myModal" data-bs-target="#myModal" data-bs-toggle="modal"><img src="../assets/imageDb/<?php echo $data['bookimg']; ?>" width="100%"></a></div>
+    </div>
+      <?php } ?>                  
+
+
+
+
+    <!-- form -->
+    <div class="d-flex" style="margin: 16px;">
+        <form action="./adminphp/adminApproval.inc.php" class="d-flex flex-column" style="background: linear-gradient(133deg, black, rgb(7,8,48) 100%), rgb(33,37,41);text-align: center;border-radius: 33px;color: rgb(13,110,253);width: 100%;" method="post">
+            <div class="table-responsive" style="border-style: none;border-bottom-style: none;">
                 <table class="table">
+                    <thead>
+                        <tr></tr>
+                    </thead>
                     <tbody>
                         <tr>
-                            <td style="border-style: none;">
-                                <header></header>
+                            <td style="border-bottom-style: none;width: 298px;">
+                                <div class="table-responsive" style="border-style: none;color: rgb(13, 110, 253);">
+                                    <table class="table">
+                                        <tbody>
+                                            <tr>
+                                                <td style="border-style: none;">
+                                                    <header>
+                                                        <h6 class="display-5 text-primary">Approve Payment</h6>
+                                                    </header>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="d-flex justify-content-lg-center" style="border-style: none;">
+                                                <input type="hidden" value="<?php echo $idurl; ?>" name="id">
+                                                    <div class="btn-group d-flex flex-fill" role="group">
+                                                        <button class="btn btn-success" type="submit" name="yes">Yes, I receive the payment</button>
+                                                        <button class="btn btn-danger" type="submit" name ="no">No, I did not receive the payment</button></div>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="border-style: none;">
+                                                <button class="btn btn-secondary" name="later">Maybe, later</button>
+                                            </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </td>
                         </tr>
-                        <tr>
-                            <td style="border-style: none;">
-                            <input type="hidden" name="id" value="<?php echo $idurl; ?>" />
-                                <h1 class="text-primary">Admin Approval</h1>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="border-style: none;">
-                                <p class="text-secondary"><?php echo $nameurl; ?> want to Confirm its Payment</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="d-flex flex-column" style="border-style: none;">
-                            <button class="btn btn-success" type="submit" style="margin: 4px;" name="yes"><span>I receive the payment</span></button>
-                            <button class="btn btn-danger text-center d-flex flex-column" type="submit" name="no" style="margin: 4px;"><span>I did not receive the payment</span></button>
-                            <a href="admin.php" class="btn btn-light"> Close </a>
-                        </td>
-                        </tr>
+                        <tr></tr>
                     </tbody>
                 </table>
             </div>
         </form>
-      
     </div>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
 </body>
 
 </html>

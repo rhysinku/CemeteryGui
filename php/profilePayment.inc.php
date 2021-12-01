@@ -8,6 +8,11 @@ $id2 = $_POST['pID'];
 $profile = $_POST['profile'];
 $admin = "waiting";
 
+
+$imagename =$_FILES['bookimg']['name'];
+$imagetemp = $_FILES['bookimg']['tmp_name'];
+$newimage = uniqid("CemimgProfile-",true).'.'.$imagename; // rename image to avoid duplicate
+
 if (isset($_POST['pay']))
 {
     $sql = "SELECT * FROM user WHERE userName = '$profile'";
@@ -17,10 +22,16 @@ if (isset($_POST['pay']))
     if($accpass == $row['userPwd'])
     {
         
-        $sql2 = "UPDATE booking SET payment = 'pending' , adminapprove = '$admin' ,  gcash='$gcash' WHERE id = '$id2'";
+            
+
+        
+        $sql2 = "UPDATE booking SET adminapprove = '$admin' , payment = 'pending',  gcash='$gcash' , bookimg = '$newimage' WHERE id = '$id2'";
         if(mysqli_query($conn,$sql2))
         {
-            //echo mysqli_errno($conn); MY LIFE SAVER
+            $location = '../assets/imageDb/'.$newimage;
+                
+           /*  move_uploaded_file($imagetemp,$location);
+            echo mysqli_errno($conn); */
             header("Location: ../Profile.php?succ=PaySuc");
             
         }

@@ -26,10 +26,38 @@
      </ul>
     </div>
    </nav>
+  </div>
 
-   
+   <div>
+<form method="POST" action="imgupload.php" enctype="multipart/form-data">
+<input type="file" name="img" required accept="image/png, image/gif, image/jpeg" >
+<button type="submit" name="imgpass" > Submit</button>
+</form>
+   </div>
 
- </body>
+   </div>
+
+   <div>
+     <?php 
+$conn = mysqli_connect("localhost","root", "", "cemetery2");
+$sql = "SELECT * FROM imgup";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0){
+  while ($imgs = mysqli_fetch_assoc($result))
+  { ?>
+    <h1> <?php echo $imgs['id'];?></h1>
+    <h2> <?php echo $imgs['img'];?></h2>
+    <img style="width: 100%;
+			          height: 100%;"
+        src="./assets/<?php echo $imgs['img'];?>">
+
+
+<?php
+  }
+}
+     ?>
+  </body> 
 </html>
 <script src="assets/bootstrap/js/bootstrap.min.js"></script>
 <script>

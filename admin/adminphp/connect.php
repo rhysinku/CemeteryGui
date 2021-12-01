@@ -40,7 +40,21 @@ if(isset($_GET['cdelete']))
     
 }
 
+if(isset($_GET['bookCdelete']))
+{
+    $id = $_GET['bookCdelete'];
+    $del= "DELETE FROM booking WHERE id = '$id'";
+
+    if (mysqli_query($conn,$del)) {
+        header ("location: ../transactionHis.php?msg=deletesuc");
+    }
+    else{
+        header ("location: ../transactionHis.php?msg=NOdelete");
+    }
+}
+
 else
 {
     header("Location: ../client.php?error=connectionError");
 }
+

@@ -40,6 +40,11 @@ elseif(isset($_GET["succ"])){
         $error =" <p class='font-monospace text-center text-success'> Booking Updated Succesfully </p>";
     }  
 
+    if ($_GET["succ"] == "Userlogin")
+    {
+        $error =" <p class='font-monospace text-center text-success'> Welcome " .$_SESSION["user"]. "</p>";
+    }  
+
 }
 
 else
