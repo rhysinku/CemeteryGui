@@ -13,7 +13,7 @@ include_once 'header.php';
                             </td>
                         </tr>
                         <tr>
-                            <td style="border-style: none;"><input type ="none" name ="id" value ="<?php echo @$_SESSION['userId'] ?>"/>  
+                            <td style="border-style: none;"><input type ="hidden" name ="id" value ="<?php echo @$_SESSION['userId'] ?>"/>  
                             <input class="form-control form-control-lg" type="text" data-bs-toggle="tooltip" data-bss-tooltip="" data-bs-placement="left" placeholder="Name of Corpse" name="corpse" id="corpse" style="background: rgba(255,255,255,0);text-align: center;color: rgb(13,110,253);border-style: none;" title="Name of Corpse" required></td>
                         </tr>
                         <tr>

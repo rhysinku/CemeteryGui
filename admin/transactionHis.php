@@ -112,7 +112,7 @@ include_once 'admin.header.php';
                                         </div>
                                         <div class="modal-body">
                                             <p>Are you sure to DELETE <?php echo $view['userName']; ?>'s transaction</p>
-                                            <p><?php echo $view['corpse']; ?>'s Booking</p>
+                                            <p><?php echo $view['corpse']; ?>'s Booking</p> 
                                         </div>
                                         <div class="modal-footer"><button class="btn btn-light" type="button" data-bs-dismiss="modal">Cancel</button>
                                         <a  href="adminphp/connect.php?bookCdelete=<?php echo $view['id'];?>" class="btn btn-danger" >Delete</a></div>
